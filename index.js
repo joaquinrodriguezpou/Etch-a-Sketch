@@ -5,3 +5,11 @@ for (let i = 0; i < (16*16); i++) {
     div.classList.add('square');
     container.appendChild(div);
 }
+
+const squares = Array.from(document.querySelectorAll('.square'));
+
+
+squares.forEach(div => div.addEventListener('mouseover', function(){
+    this.style.backgroundColor = 'red';
+}
+))
