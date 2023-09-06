@@ -8,8 +8,12 @@ for (let i = 0; i < (16*16); i++) {
 
 const squares = Array.from(document.querySelectorAll('.square'));
 
-
 squares.forEach(div => div.addEventListener('mouseover', function(){
-    this.style.backgroundColor = 'red';
+    //let randomColor = `${getRandomNumber}, ${getRandomNumber}, ${getRandomNumber}`;
+    function getRandomNumber(){
+        return Math.floor(Math.random() * 250);
+    }
+    const randomColor = `rgb(${getRandomNumber()}, ${getRandomNumber()}, ${getRandomNumber()})`;
+    this.style.backgroundColor = randomColor;
 }
 ))
