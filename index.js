@@ -4,33 +4,48 @@ const slider = document.getElementById('slider');
 const sliderValue = document.getElementById('sliderValue');
 let value = 16;
 
-for (let i = 0; i < (value**2); i++) {
+function getRandomNumber(){
+    return Math.floor(Math.random() * 255);
+}
+
+function getGrid(){
+    for (let i = 0; i < (value**2); i++) {
    const div = document.createElement('div');
     div.classList.add('square');
     container.appendChild(div);
+    }
+
+    const squares = Array.from(document.querySelectorAll('.square'));
+    squares.forEach(div => div.addEventListener('mouseover', function(){       
+        const randomColor = `rgb(${getRandomNumber()}, ${getRandomNumber()}, ${getRandomNumber()})`; 
+        this.style.backgroundColor = randomColor;
+       
+    }
+    ))
 }
 
-const squares = Array.from(document.querySelectorAll('.square'));
-function getRandomNumber(){
-    return Math.floor(Math.random() * 250);
+function changeNumOfSquares () {
+        slider.addEventListener('input', function() {
+        value = this.value;
+        sliderValue.textContent = value + 'x' + value; 
+        container.innerHTML = '';
+
+        for (let i = 0; i < (value**2); i++) {
+            const div = document.createElement('div');
+            div.classList.add('square');
+            div.style.width = 100 / value + '%';
+            container.appendChild(div);           
+        };
+
+        squares = Array.from(document.querySelectorAll('.square'));
+        squares.forEach(div => div.addEventListener('mouseover', function(){
+
+            const randomColor = `rgb(${getRandomNumber()}, ${getRandomNumber()}, ${getRandomNumber()})`;
+            this.style.backgroundColor = randomColor;
+        }
+        ));
+    });
 }
 
-squares.forEach(div => div.addEventListener('mouseover', function(){
-    const randomColor = `rgb(${getRandomNumber()}, ${getRandomNumber()}, ${getRandomNumber()})`;
-    this.style.backgroundColor = randomColor;
-}
-))
-
-
-slider.addEventListener('input', function() {
-    value = this.value;
-    sliderValue.textContent = value + 'x' + value; 
-    container.innerHTML = '';
-    const squareSize = 100 / value + '%';
-    for (let i = 0; i < (value**2); i++) {
-        const div = document.createElement('div');
-        div.classList.add('square');
-        container.appendChild(div);
-        div.style.width = squareSize;
-    };
-});
+getGrid();
+changeNumOfSquares();
